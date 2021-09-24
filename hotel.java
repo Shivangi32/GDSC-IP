@@ -26,9 +26,9 @@ public class Solution {
         int count=0;
         Pair[] p=new Pair[arrive.size()];
         for (int k = 0; k < arrive.size(); k++) {
-           p[i]=new Pair(arrive.get(k),depart.get(k));
+           p[k]=new Pair(arrive.get(k),depart.get(k));
         }
-        Arrays.sort(p);
+        //Arrays.sort(p);
         while(i<p.length && j<p.length)
         {
             if(p[i].start<p[j].end)

@@ -22,28 +22,27 @@ public class Solution {
     }
     public boolean hotel(ArrayList<Integer> arrive, ArrayList<Integer> depart, int c) {
 
-        int i=0,j=0;
         int count=0;
         Pair[] p=new Pair[arrive.size()];
         for (int k = 0; k < arrive.size(); k++) {
            p[k]=new Pair(arrive.get(k),depart.get(k));
         }
         Arrays.sort(p);
-        while(i<p.length && j<p.length)
+        PriorityQueue<Integer>pq=new PriorityQueue<>();
+        pq.add(p[0].end);
+        for(int i=1;i<p.length;i++)
         {
-            if(p[i].start<p[j].end)
+            if(p[i].start==p[i].end)
+              continue;
+            if(p[i].start>=pq.peek())
             {
-                count++;
-                i++;
+                pq.remove();
             }
-            else
-            {
-                count--;
-                j++;
-            }
-            if(count>c)
+            pq.add(p[i].end);
+            if(pq.size()>c)
               return false;
         }
+       
         return true;
     }
 }

@@ -21,11 +21,11 @@ class Solution {
                 ans+=1+n-e;
             char ch=S.charAt(s);
             switch(ch)
-                {
-                    case 'a': ca--;break;
-                    case 'b': cb--;break;
-                    case 'c': cc--;break;
-                }
+            {
+                case 'a': ca--;break;
+                case 'b': cb--;break;
+                case 'c': cc--;break;
+            }
             s++;
         }
         return ans;

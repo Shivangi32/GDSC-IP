@@ -15,21 +15,23 @@
  */
 class Solution {
     
-    List<Integer>res;
-    
-    public void helper(TreeNode root)
-    {
+    boolean ans;
+    public int helper(TreeNode root){
+        
         if(root==null)
-            return;
-        res.add(root.val);
-        helper(root.left);
-        helper(root.right);
+            return 0;
+        int left=1+helper(root.left);
+        int right=1+helper(root.right);
+        if(Math.abs(left-right)>1)
+           ans=false;
+        return Math.max(left,right);
     }
-    public List<Integer> preorderTraversal(TreeNode root) {
-       
-        res=new ArrayList<>();
+        
+    public boolean isBalanced(TreeNode root) {
+        ans=true;
         helper(root);
-        return res;
+        return ans;
+        
         
     }
 }

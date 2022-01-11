@@ -1,35 +1,26 @@
 class Solution {
-    public int minSubArrayLen(int k, int[] nums) {
+    public int minSubArrayLen(int tar, int[] nums) {
         
         int n=nums.length;
-        int psum[]=new int[n];
-        Deque<Integer>d=new ArrayDeque<Integer>();
+        int sum=0,i=0,j=0;
         int ans=Integer.MAX_VALUE;
-        for(int val:nums)
+        while(i<n && j<n)
         {
-            if(val==k)
-                return 1;
-        }
-        for(int i=0;i<n;i++)
-        {
-            if(i==0)
-                psum[i]=nums[i];
-            else
-               psum[i]=psum[i-1]+nums[i];
-            if(psum[i]>=k)
-                ans=Math.min(ans,i+1);
-            while(d.size()>0 && psum[d.getFirst()]<=psum[i]-k)
+            while(j<n && sum<tar)
             {
-                ans=Math.min(ans,i- d.getFirst());
-                d.removeFirst();
+                sum+=nums[j];
+                j++;
             }
-            while(d.size()>0 && psum[i]<=psum[d.getLast()])
-                d.removeLast();
-            d.addLast(i);
+            while(i<j && sum>=tar)
+            {
+                ans=Math.min(ans,j-i);
+                sum-=nums[i];
+                i++;
+            }
         }
-        if(ans!=Integer.MAX_VALUE)
-            return ans;
-        return 0;
+        if(ans==Integer.MAX_VALUE)
+            return 0;
+        return ans;
         
     }
 }

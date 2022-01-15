@@ -37,16 +37,14 @@ class Solution {
             {
               Pair p=qu.remove();
               int cr=p.x,cc=p.y;
-              if(mat[cr][cc]==-1)
-                   continue;
               level[cr][cc]=lvl;
-              mat[cr][cc]=-1;
               for(Pair d:dir)
               {
                 int nr=cr+d.x;
                 int nc=cc+d.y;
-                if(nr<0 || nc<0 || nr>=m || nc>=n || mat[nr][nc]==-1)
+                if(nr<0 || nc<0 || nr>=m || nc>=n || mat[nr][nc]==0)
                     continue;
+                mat[nr][nc]=0;
                 helper.add(new Pair(nr,nc));
               }
             }

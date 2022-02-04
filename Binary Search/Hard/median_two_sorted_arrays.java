@@ -1,45 +1,33 @@
 class Solution {
     public double findMedianSortedArrays(int[] nums1, int[] nums2) {
         
-        if(nums1.length>nums2.length)
-        {
-            int temp[]=nums1;
-            nums1=nums2;
-            nums2=temp;
-        }
-        int m=nums1.length;
-        int n=nums2.length;
+        int m=nums1.length,n=nums2.length;
+        if(m>n)
+        return findMedianSortedArrays(nums2,nums1);
         
-        int half=(m+n+1)/2;
-        int lo=0,hi=m;
-        while(lo<=hi)
+        int low=0,high=m,medianPos=((m+n)+1)/2;
+        while(low<=high) 
         {
-            int mid=(lo+hi)/2;
-            int bl=half-mid;
-            int a2=mid==0?Integer.MIN_VALUE:nums1[mid-1];
-            int b3=bl==0?Integer.MIN_VALUE:nums2[bl-1];
-            int a3=mid==m?Integer.MAX_VALUE:nums1[mid];
-            int b4=bl==n?Integer.MAX_VALUE:nums2[bl];
-            if(a2<=b4 && b3<=a3)
-            {
-                double median=0;
-                if((m+n)%2==0)
-                {
-                    int left=Math.max(a2,b3);
-                    int right=Math.min(a3,b4);
-                    median=(left+right)/2.0;
-                }
-                else
-                {
-                    median=Math.max(a2,b3);
-                }
-                return median;
-            }
-            if(a2>b4)
-                hi=mid-1;
-            else
-                lo=mid+1;
-        }
-        return -1;
-    }
+           int cut1 = (low+high)>>1;
+           int cut2 = medianPos - cut1;
+        
+           int l1 = (cut1 == 0)? Integer.MIN_VALUE:nums1[cut1-1];
+           int l2 = (cut2 == 0)? Integer.MIN_VALUE:nums2[cut2-1];
+           int r1 = (cut1 == m)? Integer.MAX_VALUE:nums1[cut1];
+           int r2 = (cut2 == n)? Integer.MAX_VALUE:nums2[cut2];
+        
+           if(l1<=r2 && l2<=r1) 
+           {
+               if((m+n)%2 != 0)
+                  return Math.max(l1,l2);
+               else 
+                  return (Math.max(l1,l2)+Math.min(r1,r2))/2.0;
+           }
+           else if(l1>r2)
+              high = cut1-1;
+           else 
+              low = cut1+1;
+         }
+         return 0.0;
+      }
 }

@@ -51,7 +51,7 @@ public class Main {
     int query(int l,int r)
     {
         res_fmax=Integer.MIN_VALUE;
-	    res_smax=Integer.MAX_VALUE;
+	      res_smax=Integer.MAX_VALUE;
         query_help(tree,0,n-1,l,r,1);
         return res_fmax+res_smax;
     }
